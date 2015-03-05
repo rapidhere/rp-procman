@@ -1,13 +1,17 @@
 #ifndef _RPM_DEFS_H
 #define _RPM_DEFS_H 1
 
+# include <cstdio>
+
 // Debug info tool
 #ifdef _DEBUG
-# include <cstdio>
 # define _D(msg) fprintf(stderr, "LINE %d in `%s`: %s\n", __LINE__, __FILE__, msg)
 #else
 # define _D(msg)
 #endif
+
+// Warning info
+#define _W(msg) fprintf(stderr, "Warning: %s\n", msg)
 
 // version, load from cmake
 #define RPM_VERSION_MAJOR @RPM_VersionMajor@
@@ -29,5 +33,9 @@
 
 #define RPM_DIALOG_ABOUT_TITLE "About RapiD's Process Manager"
 #define RPM_DIALOG_ABOUT_CONTENT "<p style=\"font-size: 24px\"><strong>Copyright</strong> rapidhere@gmail.com</p><p>A simple process manager woking on linux</p>"
+
+#define RPM_FORK_ME_ON_GITHUB_URL "https://github.com/rapidhere/rp-procman"
+
+#define RPM_TABBAR_PROCESS_TABLE_TITLE "Overview"
 
 #endif // ifndef _RPM_DEFS_H

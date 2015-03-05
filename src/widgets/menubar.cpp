@@ -2,6 +2,8 @@
 #include "../defs.h"
 
 #include <QMessageBox>
+#include <QDesktopServices>
+#include <QUrl>
 
 namespace rpm {
 
@@ -48,6 +50,10 @@ void MenuBar::aboutQt() {
 
 void MenuBar::forkMeOnGithub() {
     _D("menubar: on fork_me_on_github");
+
+    if(! QDesktopServices::openUrl(QUrl(RPM_FORK_ME_ON_GITHUB_URL))) { // open url failed
+        _W("menubar: on fork_me_on_github: open url failed");
+    }
 }
 
 } // namespace rpm

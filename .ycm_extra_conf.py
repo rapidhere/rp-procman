@@ -65,7 +65,8 @@ flags = [
 
 '-I', '/usr/local/Qt-5.3.1/include',
 '-I', '/usr/local/Qt-5.3.1/include/QtWidgets',
-'-I', '/usr/local/Qt-5.3.1/include/QtGui'
+'-I', '/usr/local/Qt-5.3.1/include/QtGui',
+'-I', '/usr/local/Qt-5.3.1/include/QtCore',
 
 # add src
 '-I', './src',
