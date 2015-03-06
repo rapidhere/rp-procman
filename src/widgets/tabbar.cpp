@@ -1,6 +1,6 @@
 #include "tabbar.h"
 #include "processtablewidget.h"
-#include "../defs.h"
+#include "defs.h"
 
 namespace rpm {
 

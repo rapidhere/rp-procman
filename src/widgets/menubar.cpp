@@ -1,5 +1,5 @@
 #include "menubar.h"
-#include "../defs.h"
+#include "defs.h"
 
 #include <QMessageBox>
 #include <QDesktopServices>

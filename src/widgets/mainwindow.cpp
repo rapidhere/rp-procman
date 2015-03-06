@@ -2,7 +2,7 @@
 #include "menubar.h"
 #include "statusbar.h"
 #include "tabbar.h"
-#include "../defs.h"
+#include "defs.h"
 
 #include <QApplication>
 #include <QDesktopWidget>

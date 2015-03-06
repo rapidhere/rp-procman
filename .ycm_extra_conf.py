@@ -72,12 +72,10 @@ flags = [
 '-I', './src',
 
 # use qt-widget
-'-I', './src/widgets',
 '-fPIE',
 '-D_RPM_QT_WIDGET_VERSION',
 
 # use qt-qml
-# '-I', './src/qml-widgets',
 # '-D_RPM_QT_QML_VERSION',
 ]
 

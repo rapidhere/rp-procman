@@ -41,7 +41,6 @@ IF(${RPM_CompileWith} STREQUAL qt-widget)
 
 	# load
 	INCLUDE_DIRECTORIES(./src)
-	INCLUDE_DIRECTORIES(./src/widgets)
 
     # compile ./src/widgets
     AUX_SOURCE_DIRECTORY(./src/widgets RPM_Sources)
@@ -49,6 +48,9 @@ IF(${RPM_CompileWith} STREQUAL qt-widget)
     # add moc files
     FILE(GLOB RPM_WidgetHeaders ./src/widgets/*.h)
     QT_WRAP_CPP(rp-procman RPM_Sources ${RPM_WidgetHeaders})
+
+    # compile ./src/proc
+    AUX_SOURCE_DIRECTORY(./src/proc RPM_Sources)
 
     # add main.cpp to sources
     SET(RPM_Sources ${RPM_Sources} ./src/main.cpp)
