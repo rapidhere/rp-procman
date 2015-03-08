@@ -1,17 +1,20 @@
 #ifndef _RPM_DEFS_H
 #define _RPM_DEFS_H 1
 
-# include <cstdio>
+# include <iostream>
 
 // Debug info tool
 #ifdef _DEBUG
-# define _D(msg) fprintf(stderr, "LINE %d in `%s`: %s\n", __LINE__, __FILE__, msg)
+# define _D(msg) std::cerr << "LINE " <<  __LINE__ << " in " << "`" __FILE__ "`: " << msg << std::endl;
 #else
 # define _D(msg)
 #endif
 
 // Warning info
-#define _W(msg) fprintf(stderr, "Warning: %s\n", msg)
+#define _W(msg) std::cerr << "Warning: " << msg << std::endl;
+
+// Error info
+#define _E(msg) std::cerr << "ERROR: " << msg << std::endl;
 
 // version, load from cmake
 #define RPM_VERSION_MAJOR @RPM_VersionMajor@

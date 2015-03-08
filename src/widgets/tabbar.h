@@ -13,7 +13,7 @@ class TabBar : public QTabWidget {
 public:
     TabBar();
 
-    ProcessTableWidget *processTableWidget();
+    ProcessTableWidget *processTableWidget() const;
 
 private:
     ProcessTableWidget *theProcessTableWidget;

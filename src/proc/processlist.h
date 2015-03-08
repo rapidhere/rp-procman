@@ -11,6 +11,12 @@ class ProcessList : public QVector<ProcessView*> {
 public:
     ProcessList();
     virtual ~ProcessList();
+
+    void refresh();
+    virtual void clear();
+
+private:
+    static bool isDigit(const char *);
 };
 
 } // namespace rpm

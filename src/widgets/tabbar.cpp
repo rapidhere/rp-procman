@@ -11,7 +11,7 @@ TabBar::TabBar() : QTabWidget() {
     this->addTab(theProcessTableWidget, RPM_TABBAR_PROCESS_TABLE_TITLE);
 }
 
-ProcessTableWidget *TabBar::processTableWidget() {
+ProcessTableWidget *TabBar::processTableWidget() const {
     return this->theProcessTableWidget;
 }
 

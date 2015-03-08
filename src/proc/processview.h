@@ -9,19 +9,40 @@
 
 namespace rpm {
 
-typedef pid_t Pid;
 
 class ProcessView {
 public:
-    ProcessView();
+    typedef pid_t Pid;
+    typedef char ProcessState;
+
+    const static ProcessState StateSleep = 'S';
+    const static ProcessState StateZombie = 'Z';
+    const static ProcessState StateRunning = 'R';
+
+public:
     virtual ~ProcessView();
 
-    Pid pid();
-    QString *processName();
+    Pid pid() const;
+    QString processName() const;
+    QString commandLine() const;
+    bool hasCommandLine() const;
+    int virtualMemomrySize() const;
+    ProcessState state() const;
+
+    static ProcessView *fromProcFile(const QString &);
 
 private:
+    ProcessView();
+
     Pid thePid;
-    QString *theProcessName;
+    QString theProcessName;
+    QString theCommandLine;
+    int theVmSize;
+    ProcessState theState;
+
+    static QString parseCommandLine(const QString &);
+    static QString parseProcessName(const QString &);
+    static void parseStatusFile(const QString &, ProcessView *);
 };
 
 } // namespace rpm
