@@ -10,6 +10,8 @@ class ProcessTableWidget : public QTableView {
 
 public:
     ProcessTableWidget();
+
+    void refresh();
 };
 
 } // namespace rpm

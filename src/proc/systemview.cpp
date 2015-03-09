@@ -17,7 +17,7 @@ void SystemView::refresh() {
     return this->pl->refresh();
 }
 
-SystemView* SystemView::getSystemView() {
+SystemView *SystemView::getSystemView() {
     if(! _systemView) {
         _systemView = new SystemView();
     }

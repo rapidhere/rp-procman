@@ -11,11 +11,18 @@ class MenuBar : public QMenuBar {
 public:
     MenuBar();
 
-private slots:
+signals:
     void help();
     void about();
     void aboutQt();
     void forkMeOnGithub();
+    void setRefreshRate(qint32);
+
+private slots:
+    void refreshRate100ms();
+    void refreshRate500ms();
+    void refreshRate1000ms();
+    void refreshRate2000ms();
 };
 
 } // namespace rpm

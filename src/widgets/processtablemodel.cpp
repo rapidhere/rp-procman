@@ -7,7 +7,6 @@
 namespace rpm {
 
 ProcessTableModel::ProcessTableModel() : QAbstractTableModel() {
-    SystemView::getSystemView()->refresh();
 }
 
 ProcessTableModel::~ProcessTableModel() {
@@ -30,12 +29,12 @@ QVariant ProcessTableModel::data(const QModelIndex &index, int role) const {
         case 0: return pv->pid();
         case 1: return pv->processName();
         case 2: return QChar(pv->state());
-        case 3:
+        case 3: return pv->virtualMemomrySize();
+        case 4:
             if(pv->hasCommandLine())
                 return pv->commandLine();
             else
                 return QString("[ %1 ]").arg(pv->processName());
-        case 4: return pv->virtualMemomrySize();
         }
     }
 
@@ -49,14 +48,19 @@ QVariant ProcessTableModel::headerData(int section, Qt::Orientation orientation,
             case 0: return QString("Pid");
             case 1: return QString("Process Name");
             case 2: return QString("State");
-            case 3: return QString("Command Line");
-            case 4: return QString("Virtual Memomry");
+            case 3: return QString("Virtual Memomry");
+            case 4: return QString("Command Line");
             }
         } else {
         }
     }
 
     return QVariant();
+}
+
+void ProcessTableModel::refresh() {
+    emit layoutAboutToBeChanged();
+    emit layoutChanged();
 }
 
 } // namespace rpm

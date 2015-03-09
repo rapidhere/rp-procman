@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+class QTimer;
+
 namespace rpm {
 
 class MenuBar;
@@ -27,6 +29,15 @@ private:
     StatusBar *_status_bar;
     TabBar *_tab_bar;
     ProcessTableWidget *_process_table_widget;
+    QTimer *_system_view_refresh_timer;
+
+private slots:
+    void refreshSystemView();
+    void showAbout();
+    void showAboutQt();
+    void forkMeOnGithub();
+    void showHelp();
+    void setRefreshRate(qint32);
 };
 
 } // namespace rpm

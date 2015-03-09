@@ -3,10 +3,16 @@
 #include "statusbar.h"
 #include "tabbar.h"
 #include "defs.h"
+#include "proc/systemview.h"
+#include "processtablewidget.h"
 
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QLayout>
+#include <QTimer>
+#include <QMessageBox>
+#include <QDesktopServices>
+#include <QUrl>
 
 namespace rpm {
 
@@ -16,6 +22,11 @@ MainWindow::MainWindow() : QMainWindow() {
     setupTabBar();
 
     setupLayout();
+
+    // setup timer
+    _system_view_refresh_timer = new QTimer(this);
+    connect(_system_view_refresh_timer, SIGNAL(timeout()), this, SLOT(refreshSystemView()));
+    _system_view_refresh_timer->start(1000);
 }
 
 void MainWindow::setupLayout() {
@@ -49,6 +60,13 @@ void MainWindow::setupMenuBar() {
 
     _menu_bar = new MenuBar();
     this->setMenuBar(_menu_bar);
+
+    // connect menu bar signals
+    connect(_menu_bar, SIGNAL(help()), this, SLOT(showHelp()));
+    connect(_menu_bar, SIGNAL(about()), this, SLOT(showAbout()));
+    connect(_menu_bar, SIGNAL(aboutQt()), this, SLOT(showAboutQt()));
+    connect(_menu_bar, SIGNAL(forkMeOnGithub()), this, SLOT(forkMeOnGithub()));
+    connect(_menu_bar, SIGNAL(setRefreshRate(qint32)), this, SLOT(setRefreshRate(qint32)));
 }
 
 void MainWindow::setupStatusBar() {
@@ -65,6 +83,42 @@ void MainWindow::setupTabBar() {
     this->setCentralWidget(_tab_bar);
 
     _process_table_widget = _tab_bar->processTableWidget();
+}
+
+void MainWindow::refreshSystemView() {
+    _D("refreshing ...");
+
+    SystemView::getSystemView()->refresh();
+    _process_table_widget->refresh();
+}
+
+void MainWindow::showHelp() {
+    _D("menubar: on help");
+}
+
+void MainWindow::showAbout() {
+    _D("menubar: on about");
+
+    QMessageBox::about(this, tr(RPM_DIALOG_ABOUT_TITLE),
+        tr(RPM_DIALOG_ABOUT_CONTENT));
+}
+
+void MainWindow::showAboutQt() {
+    _D("menubar: on about_qt");
+
+    QMessageBox::aboutQt(this);
+}
+
+void MainWindow::forkMeOnGithub() {
+    _D("menubar: on fork_me_on_github");
+
+    if(! QDesktopServices::openUrl(QUrl(RPM_FORK_ME_ON_GITHUB_URL))) { // open url failed
+        _W("menubar: on fork_me_on_github: open url failed");
+    }
+}
+
+void MainWindow::setRefreshRate(qint32 interval) {
+    this->_system_view_refresh_timer->setInterval(interval);
 }
 
 } // namespace rpm
