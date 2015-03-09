@@ -1,4 +1,5 @@
 #include "processtablemodel.h"
+#include "proc/systemview.h"
 #include "proc/processlist.h"
 #include "proc/processview.h"
 #include "defs.h"
@@ -6,17 +7,14 @@
 namespace rpm {
 
 ProcessTableModel::ProcessTableModel() : QAbstractTableModel() {
-    pl = new ProcessList();
-
-    pl->refresh();
+    SystemView::getSystemView()->refresh();
 }
 
 ProcessTableModel::~ProcessTableModel() {
-    delete pl;
 }
 
 int ProcessTableModel::rowCount(const QModelIndex & /*parent*/) const {
-    return pl->size();
+    return SystemView::getSystemView()->processList()->size();
 }
 
 int ProcessTableModel::columnCount(const QModelIndex & /*parent*/) const {
@@ -26,7 +24,7 @@ int ProcessTableModel::columnCount(const QModelIndex & /*parent*/) const {
 QVariant ProcessTableModel::data(const QModelIndex &index, int role) const {
     if(role == Qt::DisplayRole) {
         // get process view
-        ProcessView *pv = pl->at(index.row());
+        ProcessView *pv = SystemView::getSystemView()->processList()->at(index.row());
 
         switch(index.column()) {
         case 0: return pv->pid();
@@ -59,10 +57,6 @@ QVariant ProcessTableModel::headerData(int section, Qt::Orientation orientation,
     }
 
     return QVariant();
-}
-
-void ProcessTableModel::refresh() {
-    pl->refresh();
 }
 
 } // namespace rpm
