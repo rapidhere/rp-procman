@@ -34,11 +34,11 @@ public:
 private:
     ProcessView();
 
-    Pid thePid;
-    QString theProcessName;
-    QString theCommandLine;
-    int theVmSize;
-    ProcessState theState;
+    Pid _pid;
+    QString _process_name;
+    QString _command_line;
+    int _vm_size;
+    ProcessState _state;
 
     static QString parseCommandLine(const QString &);
     static QString parseProcessName(const QString &);

@@ -16,7 +16,7 @@ public:
     ProcessTableWidget *processTableWidget() const;
 
 private:
-    ProcessTableWidget *theProcessTableWidget;
+    ProcessTableWidget *_process_table_widget;
 };
 
 }

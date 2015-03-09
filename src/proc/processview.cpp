@@ -16,45 +16,45 @@
 namespace rpm {
 
 ProcessView::ProcessView() {
-    thePid = 0;
-    theVmSize = 0;
+    _pid = 0;
+    _vm_size = 0;
 }
 
 ProcessView::~ProcessView() {
 }
 
 ProcessView::Pid ProcessView::pid() const {
-    return thePid;
+    return _pid;
 }
 
 QString ProcessView::processName() const {
-    return theProcessName;
+    return _process_name;
 }
 
 QString ProcessView::commandLine() const {
-    return theCommandLine;
+    return _command_line;
 }
 
 bool ProcessView::hasCommandLine() const {
-    return theCommandLine.length() != 0;
+    return _command_line.length() != 0;
 }
 
 int ProcessView::virtualMemomrySize() const {
-    return theVmSize;
+    return _vm_size;
 }
 
 ProcessView::ProcessState ProcessView::state() const {
-    return theState;
+    return _state;
 }
 
 ProcessView *ProcessView::fromProcFile(const QString &p) {
     ProcessView *ret = new ProcessView();
 
     // get process name
-    ret->theProcessName = parseProcessName(p);
+    ret->_process_name = parseProcessName(p);
 
     // get cmdline
-    ret->theCommandLine = parseCommandLine(p);
+    ret->_command_line = parseCommandLine(p);
 
     // get other info
     parseStatusFile(p, ret);
@@ -103,12 +103,12 @@ void ProcessView::parseStatusFile(const QString &p, ProcessView *pv) {
         QString val = line.mid(sp + 1).trimmed();
 
         if(key == PROC_STATUS_FILE_KEY_PID) {
-            pv->thePid = val.toInt();
+            pv->_pid = val.toInt();
         } else if(key == PROC_STATUS_FILE_KEY_VMSIZE) {
             val.chop(3);
-            pv->theVmSize = val.toInt();
+            pv->_vm_size = val.toInt();
         } else if(key == PROC_STATUS_FILE_KEY_STATE) {
-            pv->theState = val.at(0).toLatin1();
+            pv->_state = val.at(0).toLatin1();
         }
     }
 

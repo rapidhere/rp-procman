@@ -5,14 +5,14 @@
 namespace rpm {
 
 TabBar::TabBar() : QTabWidget() {
-    this->theProcessTableWidget = new ProcessTableWidget();
-    this->theProcessTableWidget->setParent(this);
+    this->_process_table_widget = new ProcessTableWidget();
+    this->_process_table_widget->setParent(this);
 
-    this->addTab(theProcessTableWidget, RPM_TABBAR_PROCESS_TABLE_TITLE);
+    this->addTab(_process_table_widget, RPM_TABBAR_PROCESS_TABLE_TITLE);
 }
 
 ProcessTableWidget *TabBar::processTableWidget() const {
-    return this->theProcessTableWidget;
+    return this->_process_table_widget;
 }
 
 } // namespace rpm

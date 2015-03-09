@@ -33,12 +33,12 @@ void MainWindow::setupLayout() {
     // get the desktop size
     QDesktopWidget *desktop = QApplication::desktop();
 
-    int screenWidth = desktop->width();
-    int screenHeight = desktop->height();
+    int screen_width = desktop->width();
+    int screen_height = desktop->height();
 
     // center the window
-    this->move((screenWidth - RPM_MAINWINDOW_MINIMUM_WIDTH) / 2,
-        (screenHeight - RPM_MAINWINDOW_MINIMUM_HEIGHT) / 2);
+    this->move((screen_width - RPM_MAINWINDOW_MINIMUM_WIDTH) / 2,
+        (screen_height - RPM_MAINWINDOW_MINIMUM_HEIGHT) / 2);
 #else // ifndef _DEBUG
     this->move(0, 0);
 #endif // ifndef _DEBUG
@@ -47,24 +47,24 @@ void MainWindow::setupLayout() {
 void MainWindow::setupMenuBar() {
     _D("init main window: set menubar");
 
-    theMenuBar = new MenuBar();
-    this->setMenuBar(theMenuBar);
+    _menu_bar = new MenuBar();
+    this->setMenuBar(_menu_bar);
 }
 
 void MainWindow::setupStatusBar() {
     _D("init main window: set statusbar");
 
-    theStatusBar = new StatusBar();
-    this->setStatusBar(theStatusBar);
+    _status_bar = new StatusBar();
+    this->setStatusBar(_status_bar);
 }
 
 void MainWindow::setupTabBar() {
     _D("init main window: set tagbar");
 
-    theTabBar = new TabBar();
-    this->setCentralWidget(theTabBar);
+    _tab_bar = new TabBar();
+    this->setCentralWidget(_tab_bar);
 
-    theProcessTableWidget = theTabBar->processTableWidget();
+    _process_table_widget = _tab_bar->processTableWidget();
 }
 
 } // namespace rpm

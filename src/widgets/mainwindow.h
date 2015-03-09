@@ -23,10 +23,10 @@ private:
     void setupTabBar();
 
 private:
-    MenuBar *theMenuBar;
-    StatusBar *theStatusBar;
-    TabBar *theTabBar;
-    ProcessTableWidget *theProcessTableWidget;
+    MenuBar *_menu_bar;
+    StatusBar *_status_bar;
+    TabBar *_tab_bar;
+    ProcessTableWidget *_process_table_widget;
 };
 
 } // namespace rpm
